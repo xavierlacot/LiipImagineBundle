@@ -92,12 +92,17 @@ class ImagineController
                     throw new NotFoundHttpException('Source image could not be found', $e);
                 }
 
+                $outBinary = $this->filterManager->applyFilter($binary, $filter);
                 $this->cacheManager->store(
-                    $this->filterManager->applyFilter($binary, $filter),
+                    $outBinary,
                     $path,
                     $filter,
                     $resolver
                 );
+
+                if ($outBinary instanceof FileBinaryInterface) {
+                    $outBinary->unlink();
+                }
             }
 
             return new RedirectResponse($this->cacheManager->resolve($path, $filter, $resolver), 301);

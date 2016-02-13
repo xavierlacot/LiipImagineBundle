@@ -64,4 +64,12 @@ class FileBinary implements FileBinaryInterface
     {
         return $this->format;
     }
+
+    /**
+     * @return boolean
+     */
+    public function unlink()
+    {
+        return unlink($outBinary->getPath());
+    }
 }

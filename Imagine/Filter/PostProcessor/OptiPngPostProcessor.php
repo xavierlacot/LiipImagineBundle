@@ -59,8 +59,6 @@ class OptiPngPostProcessor implements PostProcessorInterface
 
         $result = new FileBinary($input, $binary->getMimeType(), $binary->getFormat());
 
-        unlink($input);
-
         return $result;
     }
 }
